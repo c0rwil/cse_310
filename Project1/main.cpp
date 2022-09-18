@@ -36,6 +36,6 @@ int main(int argc, char *argv[]){
     for (i=0; i<n; i++) fscanf(fp, "%d", &A[i]);
     for (i=0; i<n-1; i++) printf("%d ", A[i]); printf("%d\n", A[n-1]);
     free(A);
-    fclose(fp1);
+    fclose(fp);
     return 0;
 }
