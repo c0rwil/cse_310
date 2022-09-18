@@ -1,6 +1,7 @@
 //
 // Created by metzi on 9/17/22.
 //
+/*TODO this needs to be finished*/
 #include "IS.H"
 
 void insertion_sort(A[],n,p){
