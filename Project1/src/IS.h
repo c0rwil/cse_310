@@ -8,6 +8,8 @@
 using namespace std;
 //Class for insertion_sort
 class InsertionSort{
+    int *A,p,r;
+    int n = 0;
     public:
         void insertion_sort(int A[], int p = 1, int r = n) {}
 };

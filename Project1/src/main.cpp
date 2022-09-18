@@ -4,12 +4,12 @@
 /*TODO integrate this given code for main, after that start by getting functionality on a makefile w/ args to utilize
  * IS.h/IS.cpp first, then MS, then QS.*/
 #include <stdio.h>
-#include <stdlib.h>s
-#include "IS.h
+#include <stdlib.h>
+#include "IS.h"
 
 int main(int argc, char *argv[]){
     FILE *fp;
-    int n, v1, v2, v3; float x; double y;
+    int i, n, v1, v2, v3, *A; float x; double y;
 
     printf("argc=%d\n", argc);
 
@@ -37,7 +37,8 @@ int main(int argc, char *argv[]){
         exit (1);
     }
     for (i=0; i<n; i++) fscanf(fp, "%d", &A[i]);
-    for (i=0; i<n-1; i++) printf("%d ", A[i]); printf("%d\n", A[n-1]);
+    for (i=0; i<n-1; i++) printf("%d ", A[i]);
+    printf("%d\n", A[n-1]);
     free(A);
     fclose(fp);
     return 0;
