@@ -6,8 +6,9 @@
 #ifndef CSE_310_IS_H
 #define CSE_310_IS_H
 using namespace std;
-    class IS {
+//Class for insertion_sort
+class InsertionSort{
     public:
         void insertion_sort(int A[], int p = 1, int r = n) {}
-    };
+};
 #endif //CSE_310_IS_H
