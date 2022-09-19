@@ -6,11 +6,12 @@
 #ifndef CSE_310_IS_H
 #define CSE_310_IS_H
 using namespace std;
-//Class for insertion_sort
-class InsertionSort{
-    int *A,p,r;
-    int n = 0;
-    public:
-        void insertion_sort(int A[], int p = 1, int r = n) {}
-};
+
+int *A,p,r;
+int n = 0;
+
+void insertion_sort(int A[], int p = 1, int r = 1){
+
+}
+
 #endif //CSE_310_IS_H
