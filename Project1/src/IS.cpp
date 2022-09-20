@@ -12,9 +12,9 @@ void insertion_sort(int a[], int n)
     {
         k = a[i];
         j = i - 1;
+        cout<< a[j] << ">" << k <<endl;
         while (j >= 0 && a[j] > k)
         {
-            cout<< a[j] << ">" << k <<endl;
             for (int i = 0; i < n; i++)
                 cout << a[i] << " ";
             cout << endl;
@@ -23,6 +23,8 @@ void insertion_sort(int a[], int n)
             j = j - 1;
         }
         a[j + 1] = k;
+        cout<< a[j] << ">" << k <<endl;
+
     }
 }
 // A function to print an array of size n
