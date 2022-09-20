@@ -2,11 +2,8 @@ EXEC = PJ1
 CC = g++
 CFLAGS = -c -Wall
 #
-$(EXEC) :main.o IS.o
-	$(CC) -o $(EXEC) main.o IS.o
-#
-main.o :main.cpp IS.h
-	$(CC) $(CFLAGS) main.cpp
+$(EXEC) :IS.o
+	$(CC) -o $(EXEC) IS.o
 #
 IS.o :IS.cpp IS.h
 	$(CC) $(CFLAGS) IS.cpp
