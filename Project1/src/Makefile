@@ -5,7 +5,7 @@ CFLAGS = -c -Wall
 $(EXEC) :IS.o
 	$(CC) -o $(EXEC) IS.o
 #
-IS.o :IS.cpp IS.h
+IS.o :IS.cpp
 	$(CC) $(CFLAGS) IS.cpp
 #
 #MS.o :MS.h MS.cpp

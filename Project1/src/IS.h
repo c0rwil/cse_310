@@ -5,8 +5,5 @@
 #pragma once
 #ifndef CSE_310_IS_H
 #define CSE_310_IS_H
-class InsertionSort {
-public:
-    void insertion_sort(int A[], int n) {};
-};
+static void insertion_sort(int A[], int n);
 #endif //CSE_310_IS_H
