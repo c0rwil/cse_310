@@ -36,7 +36,6 @@ void show_array(int A[], int n)
 int main(){
     int unsorted_array[] = {5,2,1,9,7,3};
     int size = (sizeof(unsorted_array) / sizeof(unsorted_array[0]));
-    cout << size << endl;
     insertion_sort(unsorted_array,size);
     show_array(unsorted_array,size);
     return 0;
