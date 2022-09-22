@@ -5,26 +5,27 @@
 #include <iostream>
 using namespace std;
 
-void insertion_sort(int a[], int n)
+void swapThem(int A[] , int *B){
+    int holder = *A;
+    *A = *B;
+    *B = holder;
+}
+void InsertionSort(int A[], int n)
 {
-    int i,j, k;
-    for (i = 1; i < n; i++)
-    {
-        k = a[i];
-        j = i - 1;
-        cout<< a[j] << ">" << k <<endl;
-        while (j >= 0 && a[j] > k)
-        {
+    int i, x,key;
+    for (i = 1; i < n; i++) {
+        key = A[i];
+        x = i-1;
+        while (i > 0 && A[i] > key) {
+            cout << A[x] << ">" << A[x] << endl;
             for (int i = 0; i < n; i++)
-                cout << a[i] << " ";
+                cout << A[i] << " ";
             cout << endl;
-
-            a[j + 1] = a[j];
-            j = j - 1;
+            swapThem(&A[i+1],&A[i]);
+            x = x - 1;
         }
-        a[j + 1] = k;
-        cout<< a[j] << ">" << k <<endl;
-
+        A[x + 1] = key;
+        cout << A[x] << ">hhhhh" << key << endl;
     }
 }
 // A function to print an array of size n
@@ -38,7 +39,14 @@ void show_array(int A[], int n)
 int main(){
     int unsorted_array[] = {0,2,5,1,4};
     int size = (sizeof(unsorted_array) / sizeof(unsorted_array[0]));
-    insertion_sort(unsorted_array,size);
+    InsertionSort(unsorted_array,size);
     show_array(unsorted_array,size);
     return 0;
 }
+// 1. a1(0) > a2(2)
+// 2. a2(2) > a3(5)
+// 3. a3(5) > a4(1)
+// 4. a2(2) > a4(1)
+// 5. a1(0) > a4(1)
+// 6. a3(5) > a5(4)
+// 7. a2(2) > a5(4)
