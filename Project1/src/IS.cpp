@@ -1,52 +1,86 @@
-//
-// Created by metzi on 9/17/22.
-//
-/*TODO this needs to be finished*/
+// ***************************************
+// * Carlos Corral-Williams | 1222280826 *
+// ***************************************
 #include <iostream>
+#include "IS.h"
 using namespace std;
 
-void swapThem(int A[] , int *B){
-    int holder = *A;
-    *A = *B;
-    *B = holder;
-}
-void InsertionSort(int A[], int n)
+// overloaded constructor, takes all but compCount and assigns
+InsertionSort::InsertionSort(int *arr, int len, int dispArr, int dispRes, int displayCompCount)
 {
-    int i, x,key;
-    for (i = 1; i < n; i++) {
-        key = A[i];
-        x = i-1;
-        while (i > 0 && A[i] > key) {
-            cout << A[x] << ">" << A[x] << endl;
-            for (int i = 0; i < n; i++)
-                cout << A[i] << " ";
-            cout << endl;
-            swapThem(&A[i+1],&A[i]);
-            x = x - 1;
-        }
-        A[x + 1] = key;
-        cout << A[x] << ">hhhhh" << key << endl;
-    }
-}
-// A function to print an array of size n
-void show_array(int A[], int n)
-{
-    for (int i = 0; i < n; i++)
-        cout << A[i] << " ";
-    cout << endl;
+    this->compCount=0;
+    this->len=len;
+    this->arr=arr;
+    this->dispRes=dispRes;
+    this->dispArr=dispArr;
+    this->displayCompCount=displayCompCount;
 }
 
-int main(){
-    int unsorted_array[] = {0,2,5,1,4};
-    int size = (sizeof(unsorted_array) / sizeof(unsorted_array[0]));
-    InsertionSort(unsorted_array,size);
-    show_array(unsorted_array,size);
-    return 0;
+void InsertionSort::display(){
+    for (int x = 0; x < len; x++){
+        cout << " " << arr[x];
+    }
+    cout << "\n";
 }
-// 1. a1(0) > a2(2)
-// 2. a2(2) > a3(5)
-// 3. a3(5) > a4(1)
-// 4. a2(2) > a4(1)
-// 5. a1(0) > a4(1)
-// 6. a3(5) > a5(4)
-// 7. a2(2) > a5(4)
+
+// function to print out the contents of the array object
+void InsertionSort::displayArr()
+{
+    if (dispArr==1)
+    {
+        cout << "A[" << 1 << ":" << len << "]:";
+        display();
+    }
+}
+// function to print contents after sorting
+void InsertionSort::displayRes()
+{
+    if (dispRes==1)
+    {
+        cout << "A[" << 1 << ":" << len << "] after sorting:";
+        display();
+    }
+}
+
+// insertion_sort takes an array and size of the array and sorts the array using the insertion_sort algorithm
+void InsertionSort::insertionSort()
+{
+    int valueAtIndex, i, anchor;
+    int dispRes = 1;
+
+    for (i = 0; i < len; i++)
+    {
+        anchor = i;
+        valueAtIndex = arr[i];
+        while (anchor> 0 && sortComp(arr[anchor-1],valueAtIndex))
+        {
+            arr[anchor] = arr[anchor - 1];
+            displayArr();
+            anchor= anchor-1;
+        }
+        arr[anchor] = valueAtIndex;
+        if (dispRes++>1){
+            displayArr();
+        }
+    }
+}
+
+int InsertionSort::sortThem()
+{
+    insertionSort();
+    displayRes();
+
+    return compCount;
+}
+
+// displays EWC thru out sorting of array if displayCompCount is not set to 0 / false
+bool InsertionSort::sortComp(int x, int y)
+{
+    compCount++;
+    if (displayCompCount == 1)
+        cout << "EWC: " << x << " > " << y << "?"<< "\n";
+    if(x > y){
+        return 1;}
+    else
+        return 0;
+}

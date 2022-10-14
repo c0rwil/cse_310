@@ -1,3 +1,0 @@
-Usage: ./PJ1 alg flag
-       alg should be in {InsertionSort, MergeSort, QuickSort}
-       flag should be in {0, 1}

@@ -1,14 +1,25 @@
-//
-// Created by metzi on 9/17/22.
-//
-/*TODO this needs to be finalized*/
+// ***************************************
+// * Carlos Corral-Williams | 1222280826 *
+// ***************************************
 #pragma once
-#ifndef CSE_310_QS_H
-#define CSE_310_QS_H
-using namespace std;
-// class for quick_sort function
+#ifndef QS
+#define QS
 class QuickSort{
-    public:
-        void quick_sort(int A[], int p = 1, int r = n) {}
+    int partition(int, int);
+    void displayArr(int, int);
+    void displayRes();
+    void display(int,int);
+    void swap(int, int, int, int);
+    void quickSort(int, int);
+    void displayComparisons(int,int);
+public:
+    int len;
+    int *arr;
+    int dispArr;
+    int dispRes;
+    int displayCompCount;
+    int compCount;
+    int sortThem();
+    QuickSort(int *, int, int, int, int);
 };
-#endif //CSE_310_QS_H
+#endif

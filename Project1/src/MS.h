@@ -1,14 +1,19 @@
-//
-// Carlos Corral-Williams
-//
-/*TODO this needs to be checked*/
+// ***************************************
+// * Carlos Corral-Williams | 1222280826 *
+// ***************************************
 #pragma once
-#ifndef CSE_310_MS_H
-#define CSE_310_MS_H
-using namespace std;
-// class for merge_sort function
+#ifndef MS
+#define MS
 class MergeSort{
-    public:
-        void merge_sort(int A[], int p = 1, int r = n) {}
+    void merge(int,int,int);
+    void mergeSort(int,int);
+    void displayArr(int, int);
+    void display(int,int);
+    void displayRes();
+    bool sortComp(int *, int *, int, int);
+public:
+    int len, *arr, dispArr, dispRes, displayCompCount, compCount;
+    int sortThem();
+    MergeSort(int *, int, int, int, int);
 };
-#endif //CSE_310_MS_H
+#endif

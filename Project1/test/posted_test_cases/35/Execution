@@ -1,3 +1,0 @@
-mv INPUT.txt sINPUT.txt
-./PJ1 InsertionSort 0 > myOUTPUT.txt
-mv sINPUT.txt INPUT.txt

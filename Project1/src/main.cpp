@@ -1,45 +1,78 @@
-//
-// Created by metzi on 9/17/22.
-//
-/*TODO integrate this given code for main, after that start by getting functionality on a makefile w/ args to utilize
- * IS.h/IS.cpp first, then MS, then QS.*/
-#include <stdio.h>
-#include <stdlib.h>
+// ***************************************
+// * Carlos Corral-Williams | 1222280826 *
+// ***************************************
+
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <cstring>
 #include "IS.h"
+#include "MS.h"
+#include "QS.h"
+using namespace std;
 
-int main(int argc, char *argv[]){
-    FILE *fp;
-    int i, n, v1, v2, v3, *A; float x; double y;
+int main(int argc, char *argv[]) {
+    ifstream txt;
+    int len, *inputArr, txtID, compareCount, anchor;
+    int dispArr = 0, dispRes = 0,displayCompCount=0;
+    txt.open("INPUT.txt");
+    if (txt.is_open()){
+        anchor = 0;
+        txt >> dispRes;
+        txt >> dispArr;
+        txt >> len;
+        inputArr = new int[len];
+        while (txt >> txtID) {
+            inputArr[anchor] = txtID;
+            anchor++;
+            }
+        }
+    else{
+        cout << "Error: cannot open file " << "INPUT.txt" << "\n";
+        exit(0);
+        }
+    txt.close();
 
-    printf("argc=%d\n", argc);
-
-    for (int i=0; i<argc; i++){
-        printf("The str value of argv[%d] is %s\n", i, argv[i]);
-        printf("The int value of argv[%d] is %d\n\n", i, atoi(argv[i]));
+    if (argc <= 2) {
+        cout << "Usage: ./PJ1 alg flag\n"
+                "       "
+                "alg should be in {InsertionSort, MergeSort, QuickSort}\n"
+                "       "
+                "flag should be in {0, 1}\n";
+        exit(0);
     }
 
-    if (argc < 3){
-        printf("Usage: %s input_file output_file\n", argv[0]);
-        exit (1);
+    displayCompCount = atoi(argv[2]);
+
+    if (displayCompCount > 1 || displayCompCount < 0) {
+        cout << "Usage: ./PJ1 alg flag\n"
+                "       "
+                "alg should be in {InsertionSort, MergeSort, QuickSort}\n"
+                "       "
+                "flag should be in {0, 1}\n";
+        exit(0);
     }
 
-    fp = fopen(argv[1], "r");
-    if (fp == NULL) {
-        fprintf(stderr, "Error: cannot open file %s\n", argv[1]);
-        exit (1);
+    if(strcmp(argv[1], "QuickSort") == 0) {
+        QuickSort quickSort(inputArr, len, dispArr, dispRes, displayCompCount);
+        compareCount = quickSort.sortThem();
     }
-
-    v1=fscanf(fp, "%d", &n); v2=fscanf(fp, "%f", &x); v3=fscanf(fp, "%lf", &y);
-    fscanf(fp, "%d", &n);
-    A = (int *) malloc(n*sizeof(int));
-    if (A == NULL) {
-        fprintf(stderr, "Error: cannot allocate memory\n");
-        exit (1);
+    else if (strcmp(argv[1], "MergeSort") == 0) {
+        MergeSort mergeSort(inputArr, len, dispArr, dispRes, displayCompCount);
+        compareCount = mergeSort.sortThem();
     }
-    for (i=0; i<n; i++) fscanf(fp, "%d", &A[i]);
-    for (i=0; i<n-1; i++) printf("%d ", A[i]);
-    printf("%d\n", A[n-1]);
-    free(A);
-    fclose(fp);
+    else if (strcmp(argv[1], "InsertionSort") == 0) {
+        InsertionSort insertSort(inputArr, len, dispArr, dispRes, displayCompCount);
+        compareCount = insertSort.sortThem();
+    }
+    else{
+        cout << "Usage: ./PJ1 alg flag\n"
+                "       "
+                "alg should be in {InsertionSort, MergeSort, QuickSort}\n"
+                "       "
+                "flag should be in {0, 1}\n";
+        exit(0);
+    }
+    cout << "Number of EWCs: " << compareCount << "\n";
     return 0;
-}
+    }

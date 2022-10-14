@@ -1,5 +1,0 @@
-EWC: 1 > 2?
-EWC: 2 > 3?
-EWC: 3 > 4?
-EWC: 4 > 5?
-Number of EWCs: 4
