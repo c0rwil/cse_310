@@ -4,11 +4,7 @@
 
 #ifndef CSE_310_UTIL_H
 #define CSE_310_UTIL_H
-
-
-class util {
-
-};
+int next_cmd(int&,int&);
 
 
 #endif //CSE_310_UTIL_H

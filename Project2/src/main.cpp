@@ -19,11 +19,40 @@ void makeArr(int size){
     a = new TAG_ELEMENT[size];
 }
 int main(){
+    ifstream commands;
     ifstream txt;
-    string commands;
-    int len;
-    txt.open("COMMANDS");
-    if(txt.is_open()){
-        txt >> commands;
+
+    int len, anchor, ID;
+    commands.open("Commands");
+    if(commands.is_open()){
+        string cmd;
+        while(getline(commands, cmd)){
+            printf("%s",cmd.c_str());
+
+
+        }
     }
+    else{
+        cout << "Error: cannot open file " << "Commands" << "\n";
+        exit(0);
+    }
+    commands.close();
+
+    txt.open("HEAPifile.txt");
+    if(txt.is_open()){
+        anchor = 0;
+        txt >> len;
+        inArr = makeArr(len);
+        inArr = new int[len];
+        while(txt >> ID){
+            inArr[anchor] == ID
+            anchor++;
+        }
+    }
+    else{
+        cout << "Error: cannot open file " << "HEAPifile.txt" << "\n";
+        exit(0);
+    }
+    txt.close();
+    return 0;
 }
