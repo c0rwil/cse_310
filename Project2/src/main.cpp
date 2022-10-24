@@ -13,16 +13,41 @@
 #include "util.h"
 
 using namespace std;
-TAG_ELEMENT *a;
+ELEMENT *a;
 
 void makeArr(int size){
-    a = new TAG_ELEMENT[size];
+    a = new ELEMENT[size];
+
 }
-int main(){
+int main(int argc, char *arg[]){
     ifstream commands;
     ifstream txt;
-
+    int cap = 80;
+    while(true){
+        userIn =
+    }
     int len, anchor, ID;
+    ELEMENT inArr[cap];
+    txt.open("HEAPifile.txt");
+    if(txt.is_open()){
+        anchor = 0;
+        txt >> len;
+        inArr* = makeArr(len);
+//        inArr = new int[len];
+        while(txt >> ID){
+            inArr[anchor] == ID;
+            anchor++;
+        }
+    }
+    else{
+        cout << "Error: cannot open file " << "HEAPifile.txt" << "\n";
+        exit(0);
+    }
+    txt.close();
+
+    if(argc >=4 || argc <= 0){
+        cout << ""
+    }
     commands.open("Commands");
     if(commands.is_open()){
         string cmd;
@@ -38,21 +63,5 @@ int main(){
     }
     commands.close();
 
-    txt.open("HEAPifile.txt");
-    if(txt.is_open()){
-        anchor = 0;
-        txt >> len;
-        inArr = makeArr(len);
-        inArr = new int[len];
-        while(txt >> ID){
-            inArr[anchor] == ID
-            anchor++;
-        }
-    }
-    else{
-        cout << "Error: cannot open file " << "HEAPifile.txt" << "\n";
-        exit(0);
-    }
-    txt.close();
     return 0;
 }
