@@ -91,13 +91,13 @@ int main(int argc, char *argv[]){
 
         // write array into a heap
         else if(cmds == "Write"){
-            // TODO
-            //inHeap.Write();
+            //TODO
+            // inHeap.Write();
         }
 
         // display the array
         else if(cmds == "Print"){
-            // TODO implement heap stuff
+            //TODO implement heap stuff
             // inHeap.Print();
         }
 
@@ -141,7 +141,7 @@ int main(int argc, char *argv[]){
                 cerr << errOut;
                 continue;
             }
-            //TODO
+
             int selection = cmds.find(" ", 12);
             if(selection == -1){
                 string posErr = "Invalid Position\n";
