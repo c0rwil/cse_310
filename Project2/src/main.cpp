@@ -15,10 +15,6 @@
 using namespace std;
 Element *a[];
 
-void makeArr(int size){
-    a = new Element[size];
-
-}
 int main(int argc, char *argv[]){
     int adt,cap;
     ifstream commands;
@@ -146,16 +142,24 @@ int main(int argc, char *argv[]){
                 continue;
             }
             //TODO
-            // int selection = cmds.find(" ", 12);
-            // if(selection == -1){
-            //     string posErr = "Invalid Position\n";
-            //     continue;}
-            // int pos = stoi(cmds.substr(11, selection);
-            // int check
-            // try{ check = stoi(cmds.substr(selection,cmds.length()));}
-            // catch(const invalid_argument&){
-            //      string errCheck = "Invalid Key\n"; cout << errCheck; continue;}
-            //inHeap.IncreaseKey(pos-1, check);
+            int selection = cmds.find(" ", 12);
+            if(selection == -1){
+                string posErr = "Invalid Position\n";
+                cout << posErr;
+                continue;
+            }
+            int pos = stoi(cmds.substr(11, selection));
+            int check;
+            try{
+                check = stoi(cmds.substr(selection,cmds.length()));
+            }
+            catch(const invalid_argument&){
+                string errCheck = "Invalid Key\n";
+                cout << errCheck;
+                continue;
+            }
+            //TODO
+            // inHeap.IncreaseKey(pos-1, check);
         }
 
         // extract minimum from minheap
