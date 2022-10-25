@@ -6,24 +6,24 @@
 #ifndef HEAP_H
 #define HEAP_H
 
-class ELEMENT{
-    ELEMENT(int);
-
-    int key;
+struct Element{
+    int posMin;
+    int posMax;
+    int x;
 };
+
 class HEAP{
-    enum DataStructure {MaxHeap, MinHeap, DoubleHeap};
     // cap = capacity of the (max_heap)/(min_heap)/(double_ended_heap)
     // len = size of given heap
     // adt = typeOfHeap
     int cap, len, adt;
 
-    ELEMENT *A; // array of pointers to ELEMENT obj (for max)
-    ELEMENT *a; // array of pointers to ELEMENT obj (for min)
+    Element *A; // array of pointers to ELEMENT obj (for max)
+    Element *a; // array of pointers to ELEMENT obj (for min)
 
-    void swap(ELEMENT *, int, int);
+    void swap(Element *, int, int);
     void buildHeap(int);
-    void printHeap(ELEMENT *);
+    void printHeap(Element *);
     void buildMinHeap();
     void minHeapify(int, int);
     void minHeapInsert(int);
@@ -35,9 +35,9 @@ class HEAP{
 
 public:
     // heap constructor
-    heap(ELEMENT *, int, int, int);
-    heap(int,int,int);
     heap();
+    heap(int,int,int);
+    heap(Element *, int, int, int);
 
     // basic build heap
     void buildHeap();
@@ -62,7 +62,7 @@ public:
     void write();
     void print();
     void printArray();
-    void delete(int);
+    void del(int);
 
 };
 

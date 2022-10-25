@@ -5,8 +5,8 @@
 #include "heap.h"
 using namespace std;
 
-ELEMENT::element(int a){
-    this.key = a;
+struct Element{
+    int x;
 };
 
 HEAP::heap(ELEMENT *inputArr, int len, int adt, int cap){

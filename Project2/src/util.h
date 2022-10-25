@@ -1,10 +1,14 @@
 // ***************************************
 // * Carlos Corral-Williams | 1222280826 *
 // ***************************************
+#include <string.h>
 
-#ifndef CSE_310_UTIL_H
-#define CSE_310_UTIL_H
+#ifndef UTIL_H
+#define UTIL_H
+
 int next_cmd(int&,int&);
+int inputToADT(char *[]);
+int validateCap(char *[]);
 
 
-#endif //CSE_310_UTIL_H
+#endif // UTIL_H
