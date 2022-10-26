@@ -6,9 +6,11 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-int next_cmd(int&,int&);
-int inputToADT(char *[]);
-int validateCap(char *[]);
+class Util{
+    int next_cmd(int&,int&);
+    int inputToADT(char *[]);
+    int validateCap(char *[]);
+};
 
 
 #endif // UTIL_H

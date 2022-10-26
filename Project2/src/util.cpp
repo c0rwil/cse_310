@@ -8,8 +8,8 @@
 
 using namespace std;
 
-int inputToADT(char **argv){
-    if (strcmp(argv[1] == "MaxHeap") == 0){
+int Util::inputToADT(char **argv){
+    if (strcmp(argv[1], "MaxHeap") == 0){
         return 1;
     }
     else if (strcmp(argv[1], "MinHeap") == 0){
@@ -23,7 +23,7 @@ int inputToADT(char **argv){
     }
 }
 
-int validateCap(char **argv){
+int Util::validateCap(char **argv){
     int strToInt = stoi(argv[2]);
     if(strToInt <= 0){
         return 0;

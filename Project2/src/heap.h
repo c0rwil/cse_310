@@ -7,8 +7,8 @@
 #define HEAP_H
 
 struct Element{
-    int posMin;
-    int posMax;
+    int min;
+    int max;
     int x;
 };
 
@@ -16,10 +16,15 @@ class HEAP{
     // cap = capacity of the (max_heap)/(min_heap)/(double_ended_heap)
     // len = size of given heap
     // adt = typeOfHeap
+public:
     int cap, len, adt;
 
     Element *A; // array of pointers to ELEMENT obj (for max)
     Element *a; // array of pointers to ELEMENT obj (for min)
+
+    HEAP heap();
+    HEAP heap(int,int,int);
+    HEAP heap(int, int, int, Element *);
 
     void swap(Element *, int, int);
     void buildHeap(int);
@@ -33,11 +38,9 @@ class HEAP{
     void buildMaxHeap();
     void maxKill(int);
 
-public:
     // heap constructor
-    heap();
-    heap(int,int,int);
-    heap(Element *, int, int, int);
+
+
 
     // basic build heap
     void buildHeap();
@@ -58,7 +61,7 @@ public:
     int extractMax();
 
     // helpers
-    void modArray(ELEMENT *, int);
+    void modArray(Element *, int);
     void write();
     void print();
     void printArray();

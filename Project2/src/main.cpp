@@ -13,8 +13,12 @@
 #include "util.h"
 
 using namespace std;
-Element *a[];
 
+Element *a;
+
+void makeArr(int size){
+    a = new Element[size];
+}
 int main(int argc, char *argv[]){
     int adt,cap;
     ifstream commands;
@@ -22,8 +26,8 @@ int main(int argc, char *argv[]){
     string cmds, holdTxt;
 
     if(argc < 3 || argc > 3){
-        string err0 = "Usage: ./PJ2 DataStructure Capacity\n"+
-                "       DataStructure should be in {MaxHeap, MinHeap, DoubleHeap}\n"+
+        string err0 = "Usage: ./PJ2 DataStructure Capacity\n"
+                "       DataStructure should be in {MaxHeap, MinHeap, DoubleHeap}\n"
                 "       Capacity must be a positive integer\n";
         cerr << err0;
         exit(0);
@@ -31,8 +35,8 @@ int main(int argc, char *argv[]){
 
     if(inputToADT(argv[1]) == 0)
     {
-        string errText= "Usage: ./PJ2 DataStructure Capacity\n"+
-                        "       DataStructure should be in {MaxHeap, MinHeap, DoubleHeap}\n"+
+        string errText= "Usage: ./PJ2 DataStructure Capacity\n"
+                        "       DataStructure should be in {MaxHeap, MinHeap, DoubleHeap}\n"
                         "       Capacity must be a positive integer\n";
         cerr << errText;
         exit(0);
@@ -40,8 +44,8 @@ int main(int argc, char *argv[]){
     adt = inputToADT(argv[1]);
 
     if(validateCap(argv[2]) == 0){
-        string err2 ="Usage: ./PJ2 DataStructure Capacity\n"+
-                "       DataStructure should be in {MaxHeap, MinHeap, DoubleHeap}\n"+
+        string err2 ="Usage: ./PJ2 DataStructure Capacity\n"
+                "       DataStructure should be in {MaxHeap, MinHeap, DoubleHeap}\n"
                 "       Capacity must be a positive integer\n";
         cerr << err2;
         exit(0);
@@ -63,13 +67,13 @@ int main(int argc, char *argv[]){
                     cerr << outputErr;
                     continue;
                 }
-                Element *arr = new Element[cap];
+                Element *arr[cap];
                 for(int x = 1; x < len + 1; x++){
                     heapFromTxt >> holdTxt;
                     Element holder;
-                    holder.posMax = x;
-                    holder.posMin = x;
-                    arr[x] = holder;
+                    holder.max = x;
+                    holder.min = x;
+                    arr[x] = &holder;
                 }
                 //TODO
                 // inHeap.modArray(arr,len);
