@@ -38,14 +38,14 @@ void HEAP::maxHeapify(int len, int pos){
 void HEAP::minHeapify(int len, int pos){
     int least, toLeft, toRight;
     least=pos, toLeft=(2*pos)+1, toRight=(2*pos)+2;
-    if(toRight < len && self.minHeap[toRight] < self.minHeap[least]){
+    if(toRight < len && this->minHeap[toRight] < this->minHeap[least]){
         least = toRight;
     }
-    if(self.minHeap[toLeft] < self.minHeap[least] && toLeft < len){
+    if(this->minHeap[toLeft] < this->minHeap[least] && toLeft < len){
         least = toLeft;
     }
     if(least != pos){
-        swap(self.minHeap, pos, least);
+        swap(this->minHeap, pos, least);
         minHeapify(len, least);
     }
 }
