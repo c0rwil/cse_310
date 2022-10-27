@@ -161,18 +161,18 @@ void HEAP::minHeapify(int len, int pos) {
     int r = rightNode(pos);
     int least = pos;
 
-    if (minArr[l] < minArr[pos]) {
+    if (&minArr[l] < &minArr[pos]) {
         if (l < len) {
             least = l;
         }
     }
-    if (minArr[r] < minArr[least]) {
+    if (&minArr[r] < &minArr[least]) {
         if (r < len) {
             least = r;
         }
     }
     if (least == pos)return;
-    ::swap(&minArr[pos],&minArr[least]);
+    ::swap(minArr[pos],minArr[least]);
     minHeapify(len,pos);
 }
 
@@ -209,7 +209,7 @@ void HEAP::buildMaxHeap(){
     }
 }
 
-void HEAP:buildHeap(){
+void HEAP::buildHeap(){
     if(adt ==3){
         buildMaxHeap();
         buildMinHeap();
@@ -255,7 +255,7 @@ void HEAP::insert(int value){
     } else {
         elem.key = -55555;
         maxArr[pos] = elem;
-        increaseKey(pos, value)
+        increaseKey(pos, value);
     }
 }
 
@@ -365,15 +365,18 @@ void HEAP::increaseKeyMax(int index, int value) {
     } else {
         if (index < len) {
             maxArr[index].key = value;
-            while (maxArr[index].key > maxArr[(index - 1) / 2] && index > 0) {
-                maxArr[index].posMax = ((index - 1) / 2);
-                tmp1 = maxArr[index].posMin;
-                minArr[tmp1].posMax = ((index - 1) / 2);
-                maxArr[(index - 1) / 2].posMax = index;
-                tmp2 = maxArr[(index - 1) / 2].posMin;
-                minArr[tmp2].posMax = index;
-                ::swap(maxArr[index], maxArr[(index - 1) / 2]);
-                index = (index - 1) / 2;
+            //todo check line 369 logic for comparison
+            if (maxArr[index].key > maxArr[(index - 1) / 2].key) {
+                while (index > 0) {
+                    maxArr[index].posMax = ((index - 1) / 2);
+                    tmp1 = maxArr[index].posMin;
+                    minArr[tmp1].posMax = ((index - 1) / 2);
+                    maxArr[(index - 1) / 2].posMax = index;
+                    tmp2 = maxArr[(index - 1) / 2].posMin;
+                    minArr[tmp2].posMax = index;
+                    ::swap(maxArr[index], maxArr[(index - 1) / 2]);
+                    index = (index - 1) / 2;
+                }
             }
         }
     }

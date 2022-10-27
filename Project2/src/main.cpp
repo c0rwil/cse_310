@@ -31,7 +31,7 @@ int main(int argc, char *argv[]){
         exit(0);
     }
 
-    if(inputToADT(argv[1]) == 0)
+    if(UinputToADT(argv[1]) == 0)
     {
         string errText= "Usage: ./PJ2 DataStructure Capacity\n"
                         "       DataStructure should be in {MaxHeap, MinHeap, DoubleHeap}\n"
@@ -68,8 +68,8 @@ int main(int argc, char *argv[]){
                 for(int x = 1; x < len + 1; x++){
                     heapFromTxt >> holdTxt;
                     Element holder;
-                    holder.max = x;
-                    holder.min = x;
+                    holder.posMax = x;
+                    holder.posMin = x;
                     arr[x] = &holder;
                 }
                 //TODO
@@ -135,7 +135,7 @@ int main(int argc, char *argv[]){
                  cout << "\n";
                  continue;
              }
-             cout << "ExtractMax: " >> most << "\n";
+             cout << "ExtractMax: " << most << "\n";
         }
 
         // increase value of given element
@@ -163,7 +163,7 @@ int main(int argc, char *argv[]){
                 continue;
             }
             //TODO
-            inHeap.IncreaseKey(pos-1, check);
+            inHeap.increaseKey(pos-1, check);
         }
 
         // extract minimum from minheap

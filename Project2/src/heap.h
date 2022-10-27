@@ -63,7 +63,7 @@ public:
     //constructors
 
     void heap(int, int, int);
-    void heap(int, int, int, Element *);
+    void heap(int, int, int, Element);
     ~HEAP();
 
     int parentNode(int x);
@@ -100,11 +100,11 @@ public:
     int extractMax();
 
     // helpers
-    void modArray(Element *, int);
+    void modArray(Element, int);
     void write();
     void print();
     void displayArr();
-    void displayHeap(Element *);
+    void displayHeap(Element);
     void del(int);
 };
 
