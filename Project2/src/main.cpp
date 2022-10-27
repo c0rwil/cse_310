@@ -1,7 +1,6 @@
 // ***************************************
 // * Carlos Corral-Williams | 1222280826 *
 // ***************************************
-
 // STD imports
 #include <cstdlib>
 #include <fstream>
@@ -13,12 +12,11 @@
 #include "util.h"
 
 using namespace std;
+//TODO verify method signatures valid for inHeap function calls
 
 Element *a;
+HEAP inHeap;
 
-void makeArr(int size){
-    a = new Element[size];
-}
 int main(int argc, char *argv[]){
     int adt,cap;
     ifstream commands;
@@ -51,8 +49,7 @@ int main(int argc, char *argv[]){
         exit(0);
     }
     cap = validateCap(argv[2]);
-    //TODO -- uncomment below
-    // heap inHeap(0, cap, adt);
+    inHeap(adt,0,cap);
     while(true){
         getline(cin,cmds);
 
@@ -76,8 +73,8 @@ int main(int argc, char *argv[]){
                     arr[x] = &holder;
                 }
                 //TODO
-                // inHeap.modArray(arr,len);
-                // inHeap.buildHeap();
+                inHeap.modArray(arr,len);
+                inHeap.buildHeap();
             }
             else{
                 string inaccessible = "Error: cannot open file HEAPifile.txt\n";
@@ -96,13 +93,13 @@ int main(int argc, char *argv[]){
         // write array into a heap
         else if(cmds == "Write"){
             //TODO
-            // inHeap.Write();
+            inHeap.write();
         }
 
         // display the array
         else if(cmds == "Print"){
             //TODO implement heap stuff
-            // inHeap.Print();
+            inHeap.print();
         }
 
         // insert element
@@ -122,7 +119,7 @@ int main(int argc, char *argv[]){
                 continue;
             }
             //TODO
-            // inHeap.Insert(index);
+            inHeap.insert(index);
         }
 
         // extract max from maxheap
@@ -133,9 +130,12 @@ int main(int argc, char *argv[]){
                 continue;
             }
             //TODO -- uncomment
-            // int most = inHeap.extractMax();
-            // if(most == -99999){ cout << "\n"; continue; }
-            // cout << "ExtractMax: " >> most << "\n";
+             int most = inHeap.extractMax();
+             if(most == -55555){
+                 cout << "\n";
+                 continue;
+             }
+             cout << "ExtractMax: " >> most << "\n";
         }
 
         // increase value of given element
@@ -163,7 +163,7 @@ int main(int argc, char *argv[]){
                 continue;
             }
             //TODO
-            // inHeap.IncreaseKey(pos-1, check);
+            inHeap.IncreaseKey(pos-1, check);
         }
 
         // extract minimum from minheap
@@ -174,9 +174,12 @@ int main(int argc, char *argv[]){
                 continue;
             }
             //TODO
-            // int least = inHeap.extractMin();
-            // if(least == 99999){cout << "\n"; continue;}
-            // cout << "ExtractMin: " << least << "\n";
+             int least = inHeap.extractMin();
+             if(least == 55555){
+                 cout << "\n";
+                 continue;
+             }
+             cout << "ExtractMin: " << least << "\n";
 
         }
 
@@ -205,7 +208,7 @@ int main(int argc, char *argv[]){
                 continue;
             }
             //TODO
-            // inHeap.decreaseKey(pos-1, check);
+             inHeap.decreaseKey(pos-1, check);
 
         }
 
