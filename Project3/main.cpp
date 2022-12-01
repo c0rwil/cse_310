@@ -8,99 +8,65 @@
 #include <stdio.h>
 
 // CUSTOM imports
-#include "heap.h"
-#include "util.h"
+#include "min-heap.h"
+#include "utilities.h"
 
 using namespace std;
 
 Element *a;
-Util util;
+Utilities util;
 
 int main(int argc, char *argv[]){
-    int adt,cap;
+    int adt;
     ifstream commands;
     ifstream heapFromTxt;
     string cmds, holdTxt;
+    string err0 = "Usage: ./PJ3 <GraphType> <InputFile>";
 
     if(argc < 3 || argc > 3){
-        string err0 = "Usage: ./PJ2 DataStructure Capacity\n"
-                "       DataStructure should be in {MaxHeap, MinHeap, DoubleHeap}\n"
-                "       Capacity must be a positive integer\n";
         cerr << err0;
         exit(0);
     }
 
-    if(util.inputToADT(argv[1]) == 0)
+    if(!(tolower(argv[1])) == "directed" || tolower(argv[1]) == "undirected"))
     {
-        string errText= "Usage: ./PJ2 DataStructure Capacity\n"
-                        "       DataStructure should be in {MaxHeap, MinHeap, DoubleHeap}\n"
-                        "       Capacity must be a positive integer\n";
-        cerr << errText;
+        cerr << err0;
         exit(0);
     }
-    adt = util.inputToADT(argv[1]);
+    int len;
+    heapFromTxt.open(argv[2]);
+    if(heapFromTxt.is_open()) {
+        int vertCount, edgeCount;
+        heapFromTxt >> vertCount;
+        heapfromTxt >> edgeCount;
+        ADJ list =ADJ_List(edgecount,vertCount);
+    }
+    else{
+        cerr << err0;
+        heapFromTxt.close();
+        continue;
+    }
+    heapFromTxt.close();
 
-    if(util.validateCap(argv[2]) == 0){
-        string err2 ="Usage: ./PJ2 DataStructure Capacity\n"
-                "       DataStructure should be in {MaxHeap, MinHeap, DoubleHeap}\n"
-                "       Capacity must be a positive integer\n";
-        cerr << err2;
-        exit(0);
-    }
-    cap = util.validateCap(argv[2]);
     int empty = 0;
-    HEAP heap(adt,empty,cap);
+    //    HEAP heap(adt,empty,cap);
     while(true){
         getline(cin,cmds);
-
-        // reads heapfile.txt into an array
-        if(cmds == "Read"){
-            int len;
-            heapFromTxt.open("HEAPifile.txt");
-            if(heapFromTxt.is_open()){
-                heapFromTxt >> len;
-                if(len > cap){
-                    string outputErr = "Size is bigger than capacity\n";
-                    cerr << outputErr;
-                    continue;
-                }
-                Element *arr = new Element[cap];
-                for(int x = 0; x < len ; x++){
-                    heapFromTxt >> holdTxt;
-                    Element holder;
-                    holder.posMax = x;
-                    holder.posMin = x;
-                    holder.key = stoi(holdTxt);
-                    arr[x] = holder;
-                }
-                heap.modArray(arr,len);
-                heap.buildHeap();
-            }
-            else{
-                string inaccessible = "Error: cannot open file HEAPifile.txt\n";
-                cerr << inaccessible;
-                heapFromTxt.close();
-                continue;
-            }
-            heapFromTxt.close();
-        }
-
         // stop program
-        else if(cmds == "Stop"){
+        if(tolower(cmds) == "stop"){
             exit(0);
         }
-
         // write array into a heap
         else if(cmds == "Write"){
             heap.write();
         }
 
-        // display the array
+            // display the array
         else if(cmds == "Print"){
             heap.print();
         }
 
-        // insert element
+            // insert element
         else if(cmds.substr(0,6) == "Insert"){
             int index = 0;
             if(cmds.length() <= 7){
@@ -119,22 +85,22 @@ int main(int argc, char *argv[]){
             heap.insert(index);
         }
 
-        // extract max from maxheap
+            // extract max from maxheap
         else if(cmds == "ExtractMax"){
             if(adt == 2){
                 string invalHeap = "Error: ExtractMax in a min heap or a null/empty heap\n";
                 cerr << invalHeap;
                 continue;
             }
-             int most = heap.extractMax();
-             if(most == -55555){
-                 cout << "\n";
-                 continue;
-             }
-             cout << "ExtractMax: " << most << "\n";
+            int most = heap.extractMax();
+            if(most == -55555){
+                cout << "\n";
+                continue;
+            }
+            cout << "ExtractMax: " << most << "\n";
         }
 
-        // increase value of given element
+            // increase value of given element
         else if(cmds.substr(0,11) == "IncreaseKey"){
             if(adt == 2){
                 string errOut = "Error: IncreaseKey in a min heap or a null/empty heap\n";
@@ -161,23 +127,23 @@ int main(int argc, char *argv[]){
             heap.increaseKey(pos-1, check);
         }
 
-        // extract minimum from minheap
+            // extract minimum from minheap
         else if(cmds == "ExtractMin"){
             if(adt==1){
                 string minErr = "Error: ExtractMin in a max heap or a null/empty heap\n";
                 cerr << minErr;
                 continue;
             }
-             int least = heap.extractMin();
-             if(least == 55555){
-                 cout << "\n";
-                 continue;
-             }
-             cout << "ExtractMin: " << least << "\n";
+            int least = heap.extractMin();
+            if(least == 55555){
+                cout << "\n";
+                continue;
+            }
+            cout << "ExtractMin: " << least << "\n";
 
         }
 
-        // decrease value of given element
+            // decrease value of given element
         else if(cmds.substr(0,11) == "DecreaseKey"){
             if(adt==1){
                 string errDecrease = "Error: DecreaseKey in a min heap or a null/empty heap\n";
@@ -201,17 +167,13 @@ int main(int argc, char *argv[]){
                 cout << err;
                 continue;
             }
-             heap.decreaseKey(pos-1, check);
+            heap.decreaseKey(pos-1, check);
 
         }
 
-        // invalid input
+            // invalid input
         else{
             string errMsg="Invalid Input, Try Again\n";
             cout << errMsg;
         }
     }
-
-    // exit
-    return 0;
-}

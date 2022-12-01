@@ -1,19 +1,13 @@
-// ***************************************
-// * Carlos Corral-Williams | 1222280826 *
-// ***************************************
-
-
-#ifndef HEAP_H
-#define HEAP_H
-
-struct Element{
-    int posMin;
-    int posMax;
-    int key;
-    Element(){
-        key = 0;
-    }
-};
+//
+// Created by metzi on 11/28/22.
+//
+#ifndef CSE_310_MIN_HEAP_H
+#define CSE_310_MIN_HEAP_H
+#include <stdlib.h>
+#include <iostream>
+#include <cmath>
+#include <stdio.h>
+#include "stack.h"
 
 class HEAP {
 public:
@@ -72,6 +66,4 @@ public:
     void displayHeap(Element*);
     void del(int);
 };
-
-
-#endif //HEAP_H
+#endif //CSE_310_MIN_HEAP_H

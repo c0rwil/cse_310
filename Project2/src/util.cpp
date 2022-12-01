@@ -4,18 +4,17 @@
 
 #include "util.h"
 #include <string.h>
-
-
+#include <iostream>
 using namespace std;
 
-int Util::inputToADT(char **argv){
-    if (strcmp(argv[1], "MaxHeap") == 0){
+int Util::inputToADT(char* argv){
+    if (strcmp(argv, "MaxHeap") == 0){
         return 1;
     }
-    else if (strcmp(argv[1], "MinHeap") == 0){
+    else if (strcmp(argv, "MinHeap") == 0){
         return 2;
     }
-    else if (strcmp(argv[1], "DoubleHeap") == 0){
+    else if (strcmp(argv, "DoubleHeap") == 0){
         return 3;
     }
     else{
@@ -23,8 +22,8 @@ int Util::inputToADT(char **argv){
     }
 }
 
-int Util::validateCap(char **argv){
-    int strToInt = stoi(argv[2]);
+int Util::validateCap(char *argv){
+    int strToInt = stoi(argv);
     if(strToInt <= 0){
         return 0;
     }

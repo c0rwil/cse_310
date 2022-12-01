@@ -7,10 +7,10 @@
 #define UTIL_H
 
 class Util{
-    int next_cmd(int&,int&);
-    int inputToADT(char *[]);
-    int validateCap(char *[]);
-};
+public:
+    int inputToADT(char *);
+    int validateCap(char *);
+    };
 
 
 #endif // UTIL_H

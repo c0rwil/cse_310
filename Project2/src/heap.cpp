@@ -5,7 +5,6 @@
 #include <iostream>
 #include "heap.h"
 
-//TODO heap.cpp lines 0-100 from downloads/heap
 
 using namespace std;
 
@@ -13,12 +12,12 @@ HEAP::~HEAP(){
     delete[] maxArr, delete[] minArr;
 }
 
-void HEAP::heap(int adt, int len, int cap){
+HEAP::HEAP(int adt, int len, int cap){
     this->minArr = new Element[cap];
     this->maxArr = new Element[cap];
     this->adt = adt, this->cap = cap, this->len = len;
 }
-void HEAP::heap(int adt, int len, int cap, Element *inArr){
+HEAP::HEAP(int adt, int len, int cap, Element *inArr){
     this->minArr = new Element[cap];
     this->maxArr = new Element[cap];
     this->adt = adt, this->cap=cap, this->len = len;
@@ -46,11 +45,11 @@ void HEAP::write(){
     string capaStr = "capacity=";
     string size = ", size=";
     output.open("HEAPofile.txt");
-    if (heapOutputFile.is_open())
+    if (output.is_open())
     {
         if (adt == 3)
         {
-            output << capaStr << capacity << size << len << "\n" << maxHeapStr;
+            output << capaStr << cap << size << len << "\n" << maxHeapStr;
             for (int x = 0; x < len; x++)
             {
                 if (x == (len - 1))
@@ -71,9 +70,9 @@ void HEAP::write(){
                 output << minArr[x].key << ", ";
             }
         }
-        else if (ADT == 1)
+        else if (adt == 1)
         {
-            output << capaStr << capacity << size << len;
+            output << capaStr << cap << size << len <<"\n";
             output << maxHeapStr;
             for (int x = 0; x < len; x++)
             {
@@ -87,7 +86,7 @@ void HEAP::write(){
         }
         else if (adt == 2)
         {
-            output << capaStr << capacity << size << len << "\n" << minHeapStr;
+            output << capaStr << cap << size << len << "\n" << minHeapStr;
             for (int x = 0; x < len; x++)
             {
                 if (x == (len-1))
@@ -108,12 +107,12 @@ void HEAP::write(){
 }
 
 void HEAP::displayHeap(Element *arr){
-    for(int x = 0; x < len; i++){
-        if(i == len-1){
-            cout << arr[x].key;
+    for(int x = 0; x < len; x++){
+        if(x == len-1){
+            cout << arr[x].key<< "\n";
             break;
         }
-        cout << arr[x].key << ", " << "\n";
+        cout << arr[x].key << ", ";
     }
 }
 void HEAP::displayArr(){
@@ -161,19 +160,26 @@ void HEAP::minHeapify(int len, int pos) {
     int r = rightNode(pos);
     int least = pos;
 
-    if (&minArr[l] < &minArr[pos]) {
+    if (minArr[l].key < minArr[pos].key) {
         if (l < len) {
             least = l;
         }
     }
-    if (&minArr[r] < &minArr[least]) {
+    if (minArr[r].key < minArr[least].key) {
         if (r < len) {
             least = r;
         }
     }
     if (least == pos)return;
-    ::swap(minArr[pos],minArr[least]);
-    minHeapify(len,pos);
+    minArr[pos].posMin = least;
+    int tmp1,tmp2;
+    tmp1 = minArr[pos].posMax;
+    maxArr[tmp1].posMin = least;
+    minArr[least].posMin = pos;
+    tmp2 = minArr[least].posMax;
+    maxArr[tmp2].posMin = pos;
+    swap(minArr[pos],minArr[least]);
+    minHeapify(len,least);
 }
 
 void HEAP::maxHeapify(int len, int pos) {
@@ -198,7 +204,7 @@ void HEAP::maxHeapify(int len, int pos) {
     maxArr[most].posMax = pos;
     tmp2 = maxArr[most].posMin;
     minArr[tmp2].posMax = pos;
-    swap(maxArr,pos,most);
+    swap(maxArr[pos],maxArr[most]);
     maxHeapify(len,most);
 }
 
@@ -220,7 +226,8 @@ void HEAP::buildHeap(){
     else{
         buildMaxHeap();
     }
-};
+}
+
 void HEAP::print(){
     string capaStr = "capacity=";
     string size = ", size=";
@@ -263,13 +270,15 @@ int HEAP::extractMin(){
     int least, end, index,tmp1,tmp2;
     if (len > 0) {
         least = minArr[0].key, index = minArr[0].posMax, end = len - 1;
+
         minArr[0].posMin = end;
         tmp1=minArr[0].posMax;
         maxArr[tmp1].posMin = end;
         minArr[end].posMin = 0;
         tmp2=minArr[end].posMax;
         maxArr[tmp2].posMin = 0;
-        swap(minArr, 0, end);
+
+        swap(minArr[0], minArr[end]);
         if (adt == 3) {
             maxArrDelete(index);
         }
@@ -285,12 +294,15 @@ int HEAP::extractMax(){
     int index, most, end,tmp1,tmp2;
     if (len > 0) {
         end = len-1,index=maxArr[0].posMin, most=maxArr[0].key;
+
         maxArr[0].posMax = end;
         tmp1 = maxArr[0].posMin;
         minArr[tmp1].posMax = end;
+        maxArr[end].posMax = 0;
         tmp2 = maxArr[end].posMin;
         minArr[tmp2].posMax=0;
-        swap(maxArr,0,end);
+
+        swap(maxArr[0],maxArr[end]);
         if(adt==3){
             minArrDelete(index);
         }
@@ -321,7 +333,7 @@ void HEAP::decreaseKeyMin(int index, int value) {
             minArr[((index - 1) / 2)].posMin = index;
             tmp2 = minArr[(index - 1) / 2].posMax;
             maxArr[tmp2].posMin = index;
-            ::swap(minArr[index], minArr[(index - 1) / 2]);
+            swap(minArr[index], minArr[(index - 1) / 2]);
             index = ((index - 1) / 2);
         }
     }
@@ -365,7 +377,6 @@ void HEAP::increaseKeyMax(int index, int value) {
     } else {
         if (index < len) {
             maxArr[index].key = value;
-            //todo check line 369 logic for comparison
             if (maxArr[index].key > maxArr[(index - 1) / 2].key) {
                 while (index > 0) {
                     maxArr[index].posMax = ((index - 1) / 2);
@@ -374,7 +385,7 @@ void HEAP::increaseKeyMax(int index, int value) {
                     maxArr[(index - 1) / 2].posMax = index;
                     tmp2 = maxArr[(index - 1) / 2].posMin;
                     minArr[tmp2].posMax = index;
-                    ::swap(maxArr[index], maxArr[(index - 1) / 2]);
+                    swap(maxArr[index], maxArr[(index - 1) / 2]);
                     index = (index - 1) / 2;
                 }
             }
@@ -390,22 +401,26 @@ void HEAP::minArrDelete(int index) {
     maxArr[minArr[index].posMax].posMin = end;
     minArr[end].posMin = index;
     maxArr[minArr[end].posMax].posMin = index;
-    swap(minArr,end,index);
+    swap(minArr[end],minArr[index]);
 
-    if(minArr[index].key < minArr[(index - 1) / 2].key&& index <= len && index > 0){
-        while (index > 0 && minArr[index].key < minArr[(index - 1) / 2].key)
-        {
-            minArr[index].posMin = (index - 1) / 2;
-            maxArr[minArr[index].posMax].posMin = (index - 1) / 2;
-            minArr[(index - 1) / 2].posMin = index;
-            maxArr[minArr[(index - 1) / 2].posMax].posMin = index;
+    if (minArr[index].key < minArr[(index - 1) / 2].key) {
+        if (index <= len && index > 0) {
+            while (index > 0 && minArr[index].key < minArr[(index - 1) / 2].key) {
+                int tmp1,tmp2;
+                minArr[index].posMin = (index - 1) / 2;
+                tmp1=minArr[index].posMax;
+                maxArr[tmp1].posMin = (index - 1) / 2;
+                minArr[(index - 1) / 2].posMin = index;
+                tmp2=minArr[(index-1)/2].posMax;
+                maxArr[tmp2].posMin = index;
 
-            ::swap(minArr[index], minArr[(index - 1) / 2]);
-            index = (index - 1) / 2;
+                swap(minArr[index], minArr[(index - 1) / 2]);
+                index = (index - 1) / 2;
+            }
+        } else {
+            minHeapify(len, index);
         }
-    }
-    else
-    {
+    } else {
         minHeapify(len, index);
     }
 }
@@ -415,6 +430,33 @@ void HEAP::maxArrDelete(int index){
     if(index < len){
         end = len-1;
         maxArr[index].posMax = end;
-        //todo finish
+        int tmp1,tmp2;
+        tmp1 = maxArr[index].posMin;
+        minArr[tmp1].posMax = end;
+        maxArr[end].posMax = index;
+        tmp2= maxArr[end].posMin;
+        minArr[tmp2].posMax = index;
+        swap(maxArr[end],maxArr[index]);
+
+        if (index > 0 && index <= len) {
+            if (maxArr[index].key > maxArr[(index - 1) / 2].key) {
+                while (index > 0 && maxArr[index].key > maxArr[(index - 1) / 2].key) {
+                    maxArr[index].posMax = (index - 1) / 2;
+                    int tmp1, tmp2;
+                    tmp1= maxArr[index].posMin;
+                    minArr[tmp1].posMax = (index - 1) / 2;
+                    maxArr[(index - 1) / 2].posMax = index;
+                    tmp2=maxArr[((index-1)/2)].posMin;
+                    minArr[tmp2].posMax = index;
+
+                    swap(maxArr[index], maxArr[(index - 1) / 2]);
+                    index = (index - 1) / 2;
+                }
+            } else {
+                maxHeapify(len, index);
+            }
+        } else {
+            maxHeapify(len, index);
+        }
     }
 }
