@@ -1,7 +1,6 @@
-//
-// Created by metzi on 11/28/22.
-//
-
+// ***************************************
+// * Carlos Corral-Williams | 1222280826 *
+// ***************************************
 #ifndef CSE_310_GRAPH_ALGORITHMS_H
 #define CSE_310_GRAPH_ALGORITHMS_H
 
@@ -16,30 +15,27 @@
 // custom imports:
 // -----------------
 #include "min-heap.h"
-#include "utilities.h"
-#include "stack.h"
 
-struct ELEMENT{
-    int node;
-    int key;
+
+class Element {
+public:
+    int index;
+    float key;
     int pi;
-    ELEMENT(int n);
-    ELEMENT(int n, int d, int p);
+    int posMin;
+    int posMax;
 };
 
-struct EDGE_LIST
-{
-    // edge
-    int distance;
-    int connectedIndex;
-    EDGE_LIST* next;
-    EDGE_LIST(int distance, int connectedIndex);
-    EDGE_LIST(int distance, int connectedIndex, EDGE_LIST* next);
+class Edge{
+public:
+    int u, v;
+    float w;
+    Edge *nextEdge;
 };
-
-struct ADJ_LIST{
-    EDGE_LIST* head;
-    ADJ_LIST(EDGE_LIST* head);
+class Adjacency_List{
+public:
+    Edge* head;
+    Adjacency_List(Edge* h);
 };
 
 

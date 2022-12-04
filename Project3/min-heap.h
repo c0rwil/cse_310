@@ -1,13 +1,16 @@
-//
-// Created by metzi on 11/28/22.
-//
+// ***************************************
+// * Carlos Corral-Williams | 1222280826 *
+// ***************************************
 #ifndef CSE_310_MIN_HEAP_H
 #define CSE_310_MIN_HEAP_H
 #include <stdlib.h>
 #include <iostream>
 #include <cmath>
 #include <stdio.h>
-#include "stack.h"
+//#include "stack.h"
+#include "graph-algorithms.h"
+
+
 
 class HEAP {
 public:
@@ -34,6 +37,8 @@ public:
     // basic build heap
     void buildHeap();
     void insert(int);
+    void elementInsert(Element);
+    Element extractMinElement();
 
     void buildMinHeap();
     void buildMaxHeap();
@@ -66,4 +71,6 @@ public:
     void displayHeap(Element*);
     void del(int);
 };
-#endif //CSE_310_MIN_HEAP_H
+
+
+#endif //HEAP_H
