@@ -286,6 +286,7 @@ Element HEAP::extractMinElement(){
     int end, index, tmp1, tmp2;
     if (len > 0) {
         least = minArr[0];
+        end = len -1;
 
         minArr[0].posMin = end;
         tmp1=minArr[0].posMax;
@@ -303,6 +304,7 @@ Element HEAP::extractMinElement(){
     }
     else {
         Element a;
+        a.key = FLT_MAX;
         a.posMin = -1;
         return a;
     }

@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
         heapFromTxt >> edgeCount;
         vertCount++;
         arr = new Element[vertCount];
-        adj = new Edge*[vertCount];
+        adj = new Edge*[edgeCount];
         for (int i = 0; i < vertCount; i++) {
             Element elem;
             elem.key = FLT_MAX;
@@ -178,8 +178,8 @@ int main(int argc, char *argv[]) {
             }
         }
         else if(cmds == "Vertex"){
-            for (int x = 0; x < vertCount; x++) {
-                if (x == vertCount-1) {
+            for (int x = 1; x < vertCount; x++) {
+                if (x == vertCount) {
                     cout << "Element(" << x << ")" << " = " << arr[x].key << " " << arr[x].pi << "\n";
                     break;
                 }
@@ -188,6 +188,7 @@ int main(int argc, char *argv[]) {
                 }
             }
             cout << "\n";
+            cout << arr[0].key << arr[0].pi;
         }
         else if(cmds.substr(0,9)=="PrintPath"){
             int selectionSrcIndex= cmds.find(" ", 10);
@@ -206,6 +207,9 @@ int main(int argc, char *argv[]) {
             }
            if((previousCmds=="SingleSource" && previousSource == source) || (previousCmds == "SinglePair"&& previousDestination == destination && previousSource == source)){
                if(arr[destination].key==FLT_MAX ){
+//                   cout << arr[destination].index;
+//                   cout << arr[destination].key;
+//                   cout << arr[destination].pi;
                    fprintf(stdout, "There is no path from %d to %d.\n", source, destination);
                    continue;
                }
@@ -234,6 +238,7 @@ int main(int argc, char *argv[]) {
                    i = i-1;
                }
                fprintf(stdout, "\n");
+               delete[]stak;
            }
 
         }
@@ -261,8 +266,6 @@ int main(int argc, char *argv[]) {
             }
             fprintf(stdout, "The length of the shortest path from %d to %d is: %8.2f\n",
                     source, destination, arr[destination].key);
-
-
         }
 
         else{
